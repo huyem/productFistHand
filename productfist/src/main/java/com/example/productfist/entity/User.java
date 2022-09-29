@@ -23,7 +23,7 @@ public class User {
     private String birthday = "";
     private String createBy = "";
     private String deleteBy = "";
-    private Long createAt = Long.MAX_VALUE;
+    private Long createAt = Long.MIN_VALUE;
     private Long updateAt = Long.MIN_VALUE;
     private Long deleteAt = Long.MIN_VALUE;
     @ManyToMany
