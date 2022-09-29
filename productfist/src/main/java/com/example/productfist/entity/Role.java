@@ -27,7 +27,6 @@ public class Role {
     private Long updateAt = Long.MIN_VALUE;
     private Long deleteAt = Long.MIN_VALUE;
 
-    @ManyToMany
-    Collection<Role> roles = new ArrayList<>();
+
 
 }
