@@ -17,9 +17,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nameUser = "";
-    private String emailUser = "";
-    private String addressUser = "";
+    private String name = "";
+    private String password = "";
+    private String email = "";
+    private String address = "";
     private String birthday = "";
     private String createBy = "";
     private String deleteBy = "";
