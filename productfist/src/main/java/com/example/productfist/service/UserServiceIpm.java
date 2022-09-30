@@ -1,6 +1,8 @@
 package com.example.productfist.service;
 
+import com.example.productfist.entity.Role;
 import com.example.productfist.entity.User;
+import com.example.productfist.repository.RoleRepo;
 import com.example.productfist.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,8 @@ import java.util.List;
 public class UserServiceIpm implements UserServiceItf, UserDetailsService {
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    RoleRepo roleRepo;
     private final PasswordEncoder passwordEncoder;
     @Override
     public List<User> getListUser() {
@@ -33,6 +37,19 @@ public class UserServiceIpm implements UserServiceItf, UserDetailsService {
     public User saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepo.save(user);
+    }
+
+    @Override
+    public Role saveRole(Role role) {
+        return roleRepo.save(role);
+    }
+
+    @Override
+    public void addRoleToUser(String userEmail, String rolesName) {
+        User userE = userRepo.findByName(userEmail);
+        Role role = roleRepo.findByRoleName(rolesName);
+
+        userE.getRoles().add(role);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.example.productfist.filter.CustomerAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,6 +17,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
 @EnableWebSecurity
@@ -39,12 +42,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/login/**", "/api/register/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/Users/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER", "ROLE_SUPER_ADMIN")
+                .antMatchers(POST, "/api/user/save/**").hasAnyRole("ROLE_ADMIN", "ROLE_SUPER_ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/user/edit/**").hasAnyRole("ROLE_ADMIN", "ROLE_SUPER_ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/user/delete/**").hasAnyRole("ROLE_SUPER_ADMIN")
                 .anyRequest().authenticated();
 
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomerAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 
     }
+
     @Bean
     public AuthenticationManager authenticationManagerBear() throws Exception {
         return super.authenticationManagerBean();
