@@ -27,7 +27,7 @@ public class User {
     private Long createAt = Long.MIN_VALUE;
     private Long updateAt = Long.MIN_VALUE;
     private Long deleteAt = Long.MIN_VALUE;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     Collection<Role> roles = new ArrayList<>();
 
 }

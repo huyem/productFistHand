@@ -21,19 +21,19 @@ public class ProductfistApplication {
 	PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
 	}
-	@Bean
-	CommandLineRunner run(UserServiceItf userService){
-		return args -> {
-
-
-                userService.saveUser(new User(null,"huyem1003",
-                        "A@1qazxc",
-                       "huy em","rwere ","","",
-                        "Long.MIN_VALUE",
-                        Long.MIN_VALUE,
-                        Long.MIN_VALUE,Long.MIN_VALUE,new ArrayList<>()));
-
-
-		};
-	}
+//	@Bean
+//	CommandLineRunner run(UserServiceItf userService){
+//		return args -> {
+//
+//
+//                userService.saveUser(new User(null,"huyem1003",
+//                        "A@1qazxc",
+//                       "huy em","rwere ","","",
+//                        "Long.MIN_VALUE",
+//                        Long.MIN_VALUE,
+//                        Long.MIN_VALUE,Long.MIN_VALUE,new ArrayList<>()));
+//
+//
+//		};
+//	}
 }
